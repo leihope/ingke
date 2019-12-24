@@ -1,7 +1,17 @@
 /**app.wxss**/
 
-/* 引入icon样式库 */
-@import 'icon.wxss';
+
+/* 页面设置格式 */
+page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 0 0 100rpx;
+  color: #323233;
+  font-size: 16px;
+  font-family: 'PingFang SC', Helvetica, Arial, sans-serif;
+  background: #f7f8fa;
+  -webkit-font-smoothing: antialiased;
+}
 
 /* 登录样式 */
 .logo{
@@ -45,61 +55,3 @@
     background-color: #fff;
     color: #70E500;
 }
-
-/* 搜索框 */
-.search{
-    width: 90%;
-    margin: 0rpx auto;
-    height: 35rpx;
-    /* border: 1rpx solid #cdcdcd; */
-    border-radius: 10rpx;
-    font-size: 25rpx;
-    padding: 10rpx 0rpx;
-    display: flex;
-    justify-content: start;
-    background-color: rgb(240, 240, 240);
-    /* margin-top: 20rpx;
-    margin-bottom: 20rpx; */
-  }
-  .search-box{
-    width: 95%;
-    height: 25rpx;
-    margin-left: 10rpx;
-  }
-  .icon-search{
-    margin-left: 20rpx;
-    line-height: 35rpx;
-  }
-  .search>input{
-    width: 90%;
-    height: 25rpx;
-    font-size: 25rpx;
-    position: relative;
-    top: -5rpx;
-    left: 10rpx;
-    /* background-color: red */
-  }
-
-  /* 公共类 */
-.marginTopBottom{
-    margin-top: 20rpx;
-    margin-bottom: 30rpx;
-  }
-  .barTitle{
-    width: 100%;
-    height: 56rpx;
-    padding: 20rpx 0rpx;
-    text-align: center;
-  }
-  .Title-left{
-    float: left;
-    font-size: 37rpx;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: 800;
-    color: #333;
-  }
-  .Title-right{
-    float: right;
-    font-size: 26rpx;
-    color: #aaa;
-  }

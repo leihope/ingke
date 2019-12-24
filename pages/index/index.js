@@ -1,71 +1,123 @@
-//index.js
-//获取应用实例
+// pages/main/index.js
 const app = getApp()
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgList:[
-      '/image/ad1.jpg',
-      '/image/ad2.jpg',
-      '/image/ad3.jpg',
-      '/image/ad4.jpg',
-      '/image/ad5.jpg',
-      '/image/ad6.jpg',
-      '/image/ad7.jpg'
+    tabbar: [
+      {
+        name: "首页",
+        iconPath: "wap-home-o",
+        tips: '',
+        selected: true
+      },
+      {
+        name: "我的",
+        iconPath: "user-o",
+        tips: '1',
+        selected: false
+      }
     ],
-    navList:[
-      {icon:'/image/nav-icon/diantai.png',events:'goToBangDan',text:'榜单'},
-      {icon:'/image/nav-icon/diantai.png',events:'goToBangDan',text:'听小说'},
-      {icon:'/image/nav-icon/diantai.png',events:'goToBangDan',text:'情感电台'},
-      {icon:'/image/nav-icon/diantai.png',events:'goToBangDan',text:'听相声'},
-      {icon:'/image/nav-icon/diantai.png',events:'goToBangDan',text:'儿童故事'},
-    ],
-    swiperCurrent: 0,
+    tabbarHeight: app.isIPhoneX ? 84 : 50, // 底部tabbar高度
+    activeIndex: 0,  // 选中的tab
+    scrollTopArray: [], // 记录每个页面的滚动位置
   },
-  //轮播图改变事件
-  swiperChange: function(e){
-    //console.log(e.detail.current);
-    this.setData({
-     swiperCurrent: e.detail.current
-    })
-   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.request({
-      url: 'http://mobile.ximalaya.com/mobile/discovery/v3/recommend/hotAndGuess?code=43_310000_3100&device=android&version=5.4.45',
-      data: {},
-      header: {'content-type':'application/json'},
-      method: 'GET',
-      dataType: 'json',
-      responseType: 'text',
-      success: (result)=>{
-        console.log(result);
-        if(result.statusCode == 200){
-          that.setData({
-            showitem:true,
-            // guess:result.data.guess.list[0].list,
-            xiaoshuocontent:result.data.hotRecommends.list[0].list,
-            xiangshengcontent:result.data.hotRecommends.list[2].list,
-            tuokocontent:result.data.hotRecommends.list[4].list
-          })
-        }else{
-          that.setData({
-            showitem:false
-          })
-        }
-      },
+    this.data.tabbar.forEach((item, index, arr) => {
+      this.data.scrollTopArray[index] = 0;
+      // item.isFirstLoad = true
     });
-  },
-  goToBangDan:function(){
-    wx.navigateTo({
-      url: '/pages/index/bangdan/bangdan',
+    wx.setNavigationBarTitle({
+      title: this.data.tabbar[0].name,
     })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.updateSubPageShowHide(this.data.activeIndex);
+  },
+  /**
+ * 生命周期函数--监听页面隐藏
+ */
+  onHide: function () { },
+
+  onChange(event) {
+    if (event.detail == this.data.activeIndex) return;
+    this.updateSubPageShowHide(event.detail);
+    this.setData({
+      activeIndex: event.detail,
+      pageName: this.data.tabbar[event.detail].name
+    })
+    // 还原子页面的滚动位置
+    wx.pageScrollTo({
+      duration: 0,
+      scrollTop: this.data.scrollTopArray[event.detail]
+    })
+  },
+  // 记录每个子页面的滚动位置
+  onPageScroll(e) {
+    this.data.scrollTopArray[this.data.activeIndex] = e.scrollTop;
+  },
+  // 更新组件的show hide 生命周期
+  updateSubPageShowHide(currentIndex) {
+    this.data.tabbar.forEach(function (value, i) {
+      if (i == currentIndex) {
+        value.selected = true;
+        wx.setNavigationBarTitle({
+          title: value.name,
+        })
+      } else {
+        value.selected = false;
+      }
+    })
+    this.setData({
+      tabbar: this.data.tabbar,
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+
+
+
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })
