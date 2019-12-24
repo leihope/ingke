@@ -3,7 +3,7 @@ const app = getApp();
 let userInfo = app.globalData.userInfo;
 let login = app.globalData.login;
 
-Page({
+Component({
 
   /**
    * 页面的初始数据
@@ -12,25 +12,17 @@ Page({
     
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-
-  onLoad: function (options) {
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    app.userInfoReadyCallback = function(){
+  ready: function (options) {
+    app.userInfoReadyCallback = function () {
       console.log(app.globalData);
     }
     var that = this;
-
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    console.log(that.globalData.userInfo);
     //获得设备信息
     wx.getSystemInfo({
-      success (res) {
+      success(res) {
         console.log(res.windowHeight);
         that.setData({
-          phoneHeight:res.windowHeight,
+          phoneHeight: res.windowHeight,
         })
       }
     })
@@ -48,38 +40,42 @@ Page({
     }
   },
   
-  
-  // 获取用户的头像和昵称信息
-  bindGetUserInfo(e) {
-    var that = this;
-    wx.getUserInfo({
-      success: function(res) {
-        console.log(e.detail.userInfo);
-        app.globalData.userInfo = e.detail.userInfo;
-        app.globalData.login = false;
-        that.setData({
-          login: app.globalData.login,
-          avatarUrl:e.detail.userInfo.avatarUrl,
-          nickName:e.detail.userInfo.nickName
-        })
-      }
-    })
-  },
-  
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  methods: {
+    // 获取用户的头像和昵称信息
+    bindGetUserInfo(e) {
+      var that = this;
+      wx.getUserInfo({
+        success: function (res) {
+          console.log(e.detail.userInfo);
+          app.globalData.userInfo = e.detail.userInfo;
+          app.globalData.login = false;
+          that.setData({
+            login: app.globalData.login,
+            avatarUrl: e.detail.userInfo.avatarUrl,
+            nickName: e.detail.userInfo.nickName
+          })
+        }
+      })
+    },
+    /**
+  * 用户点击右上角分享
+  */
+    onShareAppMessage: function () {
 
-  },
-  phoneLogin:function(){
-    wx.navigateTo({
-      url: './phoneLogin/phoneLogin',
-      success: (result)=>{
-        
-      },
-      fail: ()=>{},
-      complete: ()=>{}
-    });
+    },
+    phoneLogin: function () {
+      wx.navigateTo({
+        url: './phoneLogin/phoneLogin',
+        success: (result) => {
+
+        },
+        fail: () => { },
+        complete: () => { }
+      });
+    }
   }
+
+  
+  
+ 
 })

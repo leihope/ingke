@@ -27,16 +27,25 @@ Component({
     ],
     swiperCurrent: 0,
   },
+
+  /* 加载时运行的方法 */
   ready: function (options) {
-    console.log("1aa")
+    //console.log("1aa")
   },
-  //轮播图改变事件
-  swiperChange: function (e) {
-    //console.log(e.detail.current);
-    this.setData({
-      swiperCurrent: e.detail.current
-    })
-  }
+  //组件方法集
+  methods: {
+    //轮播改变事件
+    swiperChange: function (e) {
+      this.setData({
+        swiperCurrent: e.detail.current
+      })
+    }
+  },
+
+
+ 
+
+  
   /**
    * 组件监听
    */
