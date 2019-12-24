@@ -63,6 +63,15 @@ Component({
     onShareAppMessage: function () {
 
     },
+
+    contact_server: function() {
+      wx.showToast({
+      title: 'QQ:646106467',
+      icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+      duration: 2000     
+    }) 
+    },
+    
     phoneLogin: function () {
       wx.navigateTo({
         url: './phoneLogin/phoneLogin',

@@ -31,23 +31,11 @@
                     </view>
                     <view class="nickname">
                         <text class="#">{{nickName}}</text>
-                        <!-- vip勋章 -->
-                        <text class="icon-vip" style="margin-left:30rpx"></text>
                     </view>
                 </view>
-                <view class="kefu">
+                <view class="kefu" bindtap="contact_server">
                     <text class="icon-service"></text>
                     客服服务
-                </view>
-            </view>
-            <!-- 签到 -->
-            <view class="qiandao">
-                <view class="qianText">
-                    <text class="icon-calendar text-gray"></text>
-                    签到
-                </view>
-                <view class="icon_">
-                    <text class="icon-right text-gray"></text>
                 </view>
             </view>
         </view>
@@ -57,7 +45,7 @@
             <view class="choiceItem">
                 <view class="">
                     <text class="icon-time text-gray"></text>
-                    定时关闭
+                    消费记录
                 </view>
                 <text class="icon-right text-gray"></text>
             </view>
@@ -65,7 +53,6 @@
                 <view class="">
                     <text class="icon-creative text-gray"></text>
                     夜间模式
-                    <!-- <button class="switch"></button> -->
                 </view>
                 <text class="icon-right text-gray"></text>
             </view>
@@ -73,13 +60,6 @@
                 <view class="">
                     <text class="icon-post text-gray"></text>
                     意见反馈
-                </view>
-                <text class="icon-right text-gray"></text>
-            </view>
-            <view class="choiceItem">
-                <view class="">
-                    <text class="icon-order text-gray"></text>
-                    切换账号
                 </view>
                 <text class="icon-right text-gray"></text>
             </view>
